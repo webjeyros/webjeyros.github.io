@@ -8,107 +8,34 @@
     <script src="https://telegram.org/js/telegram-web-app.js"></script> <!--Подключаем скрипт от телеграм-->
 
     <style>
-        body{
-            color: var(--tg-theme-text-color);
-            background: var(--tg-theme-bg-color);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            font-size: 18px;
-        }
 
-        .hint{
-            color: var(--tg-theme-hint-color);
-        }
-
-        .link{
-            color: var(--tg-theme-link-color);
-        }
-
-        .button{
-            background: var(--tg-theme-button-color);
-            color: var(--tg-theme-button-text-color);
-            border: none;
-            font-size: 18px;
-        }
-
-        .button:not(:last-child){
-            margin-bottom: 20px
-        }
-
-        #usercard{
-            text-align: center;
-        }
     </style>
 </head>
 
 <body>
-<div id="usercard"> <!--Карта профиля, человека, который к нам обратился-->
-</div>
-<p>Just text</p> <!--Просто текст для проверки-->
-<a class="link" href="https://mihailgok.ru">Link</a> <!--Просто ссылка для проверки-->
-<p class="hint">Some little hint</p> <!--Просто текст-подсказка для проверки-->
-<button id="btn" class="button">Show/Hide Main Button</button> <!--Кнопка, чтобы скрыть / показать основную кнопку-->
-<button id="btnED" class="button">Enable/Disable Main Button</button> <!--Кнопка, чтобы сделать кнопку активной/неактивной-->
+<form method="post" action="https://goo.by/shorten" data-trigger="shorten-form-new" class="urls">
+    <div class="urls_wrap">
+        <div class="icon" style="color: #0b7ec4"><i class="icon-link"></i></div>
+        <input type="text" placeholder="Paste a long URL" name="url" id="url">
+        <!--        <div class="icon" style="color: black;cursor:pointer "><i class="fa fa-copy"></i></div>-->
+        <button type="submit"><i class="fa fa-share  d-md-none" aria-hidden="true"></i><span class="d-md-block d-none text-nowrap">Shorten URL free</span></button>
+    </div>
+    <div style="font-size: 12px;" class="text-md-right text-center">By clicking Shorten Link, I agree to the Terms of Service, Privacy Policy and Use of Cookies</div>
+    <div class="pops error_pop" style="display: none">
+        <div class="pops_wrap">
+            <div class="text">
+                <div class="title">Error!</div>
+                <div class="desc"></div>
+            </div>
+            <div class="button">
+                <a href="#" class="close">Close</a>
+                <a href="/user/login" class="login">Login</a>
+            </div>
+        </div>
+    </div>
+    <div data-id="SeZUyyjfdNsDAUl" class="mb-3"><input type="hidden" name="g-recaptcha-response" value="03AFcWeA7_w34Un859yBJgFAJpt5pirbvQu8fdPSFUp-XxlZCfU0Ju9hLdNekGhrY__NNzRZgncneJb5GlRBFygsCqpXxI05NyMSQaT4Ltl2pNV49aWScfN2famy4QHgKpqi-_HSkqdlACWUzlxHlXDONxHxlD0rrGs3xRNF7o6iL0SqT9JZIKqNpvsvYZw-wXRr7_B_hHzY2KcyHYY6Zw8rieh_jEFt_hnr0uo5Rz0jlzPLDfPGUNyG13gDYDJVwT0X9dYBhM6cs2bu5R77_aNL1P4FaDpr_nbTfOZQ7m8SrHHATrfNUCEjH3o_pR_zQ4vsWzedDIj3fzi2l9CMs0WAb3NK2MUTiHsRdpMvQ6IP7mkvlzAnjOzPKR1GDwzU9LZrqaJIGmDpDd23wTeADFuwzNrDInfmtbERXQAXPm1c0wdEefZo1FQOnP-M4nGdRN7EsWMwEPAeFWzYLspbMG1rpFxln_t0PwXYZAhZgTYmoZZJrJ1rKdoG1jRA6zs_lh6MdhfU-Q_toSAUQUCJSlZHQUelhne-oaujcDbge1x3JbwtXYQa3aij7N1Irrfa8F13Fh4Zj8i4rPdQN92e2f9CmIr8j98C6t6HLrdklB3tL0A8vgsLEPLwzVT2KqFkAZLWQ_a2L_IhlVyovF8NsnD8DVwiXi-3gcnx0-lBOA4uaR3chlnN0iYTTwBEo6xOJ5rC3s2lOlGYY1DUp-hlmnkdHBAFfv6OObVA"></div><script src="https://www.google.com/recaptcha/api.js?hl=en&amp;render=6LcUoOQUAAAAANHj_juVSgLjxCWAABmUxJr-DhCw"></script>
+
+</form>
 </body>
 
-<script>
-    let tg = window.Telegram.WebApp; //получаем объект webapp телеграма
-
-    tg.expand(); //расширяем на все окно
-
-    tg.MainButton.text = "Changed Text"; //изменяем текст кнопки
-    tg.MainButton.setText("Changed Text1"); //изменяем текст кнопки иначе
-    tg.MainButton.textColor = "#F55353"; //изменяем цвет текста кнопки
-    tg.MainButton.color = "#143F6B"; //изменяем цвет бэкграунда кнопки
-    tg.MainButton.setParams({"color": "#143F6B"}); //так изменяются все параметры
-
-    let btn = document.getElementById("btn"); //получаем кнопку скрыть/показать
-
-    btn.addEventListener('click', function(){ //вешаем событие на нажатие html-кнопки
-        if (tg.MainButton.isVisible){ //если кнопка показана
-            tg.MainButton.hide() //скрываем кнопку
-        }
-        else{ //иначе
-            tg.MainButton.show() //показываем
-        }
-    });
-
-    let btnED = document.getElementById("btnED"); //получаем кнопку активировать/деактивировать
-    btnED.addEventListener('click', function(){ //вешаем событие на нажатие html-кнопки
-        if (tg.MainButton.isActive){ //если кнопка показана
-            tg.MainButton.setParams({"color": "#E0FFFF"}); //меняем цвет
-            tg.MainButton.disable() //скрываем кнопку
-        }
-        else{ //иначе
-            tg.MainButton.setParams({"color": "#143F6B"}); //меняем цвет
-            tg.MainButton.enable() //показываем
-        }
-    });
-
-    Telegram.WebApp.onEvent('mainButtonClicked', function(){
-        tg.sendData("some string that we need to send");
-        //при клике на основную кнопку отправляем данные в строковом виде
-    });
-
-
-    let usercard = document.getElementById("usercard"); //получаем блок usercard
-
-    let profName = document.createElement('p'); //создаем параграф
-    profName.innerText = `${tg.initDataUnsafe.user.first_name}
-   ${tg.initDataUnsafe.user.last_name}
-   ${tg.initDataUnsafe.user.username} (${tg.initDataUnsafe.user.language_code})`;
-    //выдем имя, "фамилию", через тире username и код языка
-    usercard.appendChild(profName); //добавляем
-
-    let userid = document.createElement('p'); //создаем еще параграф
-    userid.innerText = `${tg.initDataUnsafe.user.id}`; //показываем user_id
-    usercard.appendChild(userid); //добавляем
-
-
-    //работает только в attachment menu
-    // let pic = document.createElement('img'); //создаем img
-    // pic.src = tg.initDataUnsafe.user.photo_url; //задаём src
-    // usercard.appendChild(pic); //добавляем элемент в карточку
-</script>
 </html>
