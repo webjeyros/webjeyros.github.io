@@ -84,14 +84,15 @@
                         fetch('https://goo.by/api/url/add', {
                             method: 'POST',
                             headers: {
-                                'Authorization': 'Bearer 77d46643c92ffd67faf6',
+                                'Authorization': 'Bearer ',
+
                                 'Content-Type': 'application/json'
                             },
                             body: JSON.stringify({'url':url})
                         }).then(function (data) {
                             console.log(data);
                         }).catch(function (err) {
-                            console.warn('Something went wrong.', err);
+                            console.log(err);
                         });
             }else{
                 console.log('error');
