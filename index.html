@@ -33,10 +33,10 @@
             <h2>Shorten links for Free with goo.by just like famous URL Shortener goo.gl, bitly to create a Tiny URL.
                 Get branded links, track &amp; analyze IP address &amp; location</h2>
             <p></p>
-            <form method="post" action="https://goo.by/shorten" data-trigger="shorten-form-new" class="urls">
+            <form method="post" id="shortForm" data-trigger="shorten-form-new" class="urls">
                 <div class="urls_wrap">
                     <div class="icon" style="color: #0b7ec4"><i class="icon-link"></i></div>
-                    <input type="text" placeholder="Paste a long URL" name="url" id="url">
+                    <input type="text" placeholder="Paste a long URL" name="url" value="https://google.com" id="url">
                     <!--        <div class="icon" style="color: black;cursor:pointer "><i class="fa fa-copy"></i></div>-->
                     <button type="submit"><i class="fa fa-share  d-md-none" aria-hidden="true"></i><span
                             class="d-md-block d-none text-nowrap">Shorten URL free</span></button>
@@ -73,7 +73,36 @@
 </div>
 
 
+<script>
+    (function() {
+        const form = document.getElementById("shortForm");
+        form.addEventListener('submit',(event)=>{
+            event.preventDefault();
+            let url=document.querySelector('#url').value;
 
+            if(url.startsWith('https://',url)){
+                        fetch('https://goo.by/api/url/add', {
+                            method: 'POST',
+                            headers: {
+                                'Authorization': 'Bearer 77d46643c92ffd67faf6',
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({'url':url})
+                        }).then(function (data) {
+                            console.log(data);
+                        }).catch(function (err) {
+                            console.warn('Something went wrong.', err);
+                        });
+            }else{
+                console.log('error');
+            }
+
+        });
+
+
+    })();
+
+</script>
 </body>
 
 </html>
